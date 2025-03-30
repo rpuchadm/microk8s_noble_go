@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: go-nombre-statefulset
+  namespace: mytestns
+spec:
+  serviceName: go-nombre-service  # Necesario para StatefulSet
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-nombre-app
+  template:
+    metadata:
+      labels:
+        app: go-nombre-app
+    spec:
+      containers:
+      - name: go-nombre-container
+        image: localhost:32000/go-nombre-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: NOMBRE
+          valueFrom:
+            configMapKeyRef:
+              name: nombre2-config
+              key: nombre
+        volumeMounts:
+        - name: data-volume
+          mountPath: /var/data
+  volumeClaimTemplates:  # ¡Aquí la magia! Crea un PVC por cada Pod.
+  - metadata:
+      name: data-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+      volumeName: go-nombre-pv  # Opcional: vincula a un PV específico.
