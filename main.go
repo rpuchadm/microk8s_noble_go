@@ -67,6 +67,9 @@ func nombreHandler(w http.ResponseWriter, r *http.Request) {
 // cuando se hace un get se devuelve el contenido del fichero
 // cuando se hace un delete se borra el fichero
 // cuando se hace un put se actualiza el contenido del fichero
+
+const base_path = "/var/data/ficheros/"
+
 func ficheroHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Obtiene el ID del fichero
@@ -81,10 +84,10 @@ func ficheroHandler(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case http.MethodGet:
-		http.ServeFile(w, r, id)
+		http.ServeFile(w, r, base_path+id)
 
 	case http.MethodPost:
-		file, err := os.Create(id)
+		file, err := os.Create(base_path + id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error al crear el fichero %v", err), http.StatusInternalServerError)
 			return
@@ -97,13 +100,13 @@ func ficheroHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 	case http.MethodDelete:
-		if err := os.Remove(id); err != nil {
+		if err := os.Remove(base_path + id); err != nil {
 			http.Error(w, "Error al borrar el fichero", http.StatusInternalServerError)
 			return
 		}
 
 	case http.MethodPut:
-		file, err := os.OpenFile(id, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)
+		file, err := os.OpenFile(base_path+id, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)
 		if err != nil {
 			http.Error(w, "Error al abrir el fichero", http.StatusInternalServerError)
 			return
