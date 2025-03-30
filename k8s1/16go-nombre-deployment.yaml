@@ -24,10 +24,3 @@ spec:
             configMapKeyRef:
               name: nombre2-config
               key: nombre
-        volumeMounts:
-        - name: data-volume
-          mountPath: /var/data  # Ruta donde se monta el PVC
-      volumes:
-      - name: data-volume
-        persistentVolumeClaim:
-          claimName: go-nombre-pv-claim  # Nombre del PVC definido

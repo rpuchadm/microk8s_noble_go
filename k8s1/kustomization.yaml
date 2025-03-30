@@ -3,7 +3,8 @@ kind: Kustomization
 namespace: mytestns
 resources:
   - 11nombre2-config.yaml
-  - 12go-nombre-deployment.yaml
+  # - 12go-nombre-deployment.yaml
   - 13go-nombre-service.yaml
   - 15go-nombre-pv-claim.yaml
+  - 16go-nombre-deployment.yaml
 
