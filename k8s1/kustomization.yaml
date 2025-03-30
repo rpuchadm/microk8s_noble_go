@@ -4,4 +4,5 @@ namespace: mytestns
 resources:
   - 11nombre2-config.yaml
   - 12go-nombre-deployment.yaml
+  - 13go-nombre-service.yaml
 

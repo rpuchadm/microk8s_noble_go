@@ -21,6 +21,8 @@ func main() {
 		currentName = "Desconocido" // Valor por defecto
 	}
 
+	fmt.Println("Nombre inicial:", currentName)
+
 	// 2. Configurar endpoints
 	http.HandleFunc("/nombre", nombreHandler)
 
