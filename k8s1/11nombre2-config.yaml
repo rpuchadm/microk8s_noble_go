@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  nombre: Rosa
+kind: ConfigMap
+metadata:
+  name: nombre2-config
+  namespace: mytestns

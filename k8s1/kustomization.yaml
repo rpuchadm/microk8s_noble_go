@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: mytestns
 resources:
-  - 01nombre-config.yaml
-  - 02nginx-alpine-deployment.yaml
+  - 11nombre2-config.yaml
+  - 12go-nombre-deployment.yaml
 

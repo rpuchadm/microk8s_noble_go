@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-nombre-deployment
+  namespace: mytestns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-nombre-app
+  template:
+    metadata:
+      labels:
+        app: go-nombre-app
+    spec:
+      containers:
+      - name: go-nombre-container
+        image: localhost:32000/go-nombre-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: NOMBRE
+          valueFrom:
+            configMapKeyRef:
+              name: nombre2-config
+              key: nombre
