@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nombre-config
+data:
+  nombre.txt: |
+    Javier

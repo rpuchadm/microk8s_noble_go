@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-alpine-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-alpine-app
+  template:
+    metadata:
+      labels:
+        app: nginx-alpine-app
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/share/nginx/html/nombre.txt
+          subPath: nombre.txt
+      - name: alpine-container
+        image: alpine
+        command: ["sh", "-c", "while true; do wget -qO- http://localhost/nombre.txt; echo; sleep 60; done"]
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nombre-config
+          items:
+          - key: nombre.txt
+            path: nombre.txt
