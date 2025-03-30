@@ -1,11 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: mytestns
-resources:
-  - 15go-nombre-pv-claim.yaml
+resources:  
   - 11nombre2-config.yaml
-  - 16go-nombre-deployment.yaml
+  - 12go-nombre-deployment.yaml
   - 13go-nombre-service.yaml
+  - 15go-nombre-pv-claim.yaml
   
   
 
