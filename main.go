@@ -68,7 +68,7 @@ func nombreHandler(w http.ResponseWriter, r *http.Request) {
 // cuando se hace un delete se borra el fichero
 // cuando se hace un put se actualiza el contenido del fichero
 
-const base_path = "/var/data/ficheros/"
+const base_path = "/var/data/"
 
 func ficheroHandler(w http.ResponseWriter, r *http.Request) {
 
