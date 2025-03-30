@@ -1,33 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: go-nombre-deployment
-  namespace: mytestns
+  name: go-nombre-pv-claim
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: go-nombre-app
-  template:
-    metadata:
-      labels:
-        app: go-nombre-app
-    spec:
-      containers:
-      - name: go-nombre-container
-        image: localhost:32000/go-nombre-service:latest
-        ports:
-        - containerPort: 8080
-        env:
-        - name: NOMBRE
-          valueFrom:
-            configMapKeyRef:
-              name: nombre2-config
-              key: nombre
-        volumeMounts:
-        - name: data-volume
-          mountPath: /var/data  # Ruta donde se monta el PVC
-      volumes:
-      - name: data-volume
-        persistentVolumeClaim:
-          claimName: go-nombre-pv-claim  # Nombre del PVC definido
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: go-nombre-pv
