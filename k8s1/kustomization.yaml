@@ -6,6 +6,5 @@ resources:
   - 13go-nombre-service.yaml
   - 15go-nombre-pv-claim.yaml
   - 16go-nombre-deployment.yaml
-  
-  
+  - 18go-nombre-ingress.yaml
 
